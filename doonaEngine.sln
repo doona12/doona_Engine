@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor_Window", "Editor_Window\Editor_Window.vcxproj", "{D8CCF3EA-4E5C-45EF-A2AD-3716C6A3B9D7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "doonaEngine_Window", "doonaEngine_Window\doonaEngine_Window.vcxproj", "{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "doonaEngine_SOURCE", "doonaEngine_SOURCE\doonaEngine_SOURCE.vcxitems", "{FBCDF916-3130-4843-A69F-3FDDA68B9B91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,11 +25,23 @@ Global
 		{D8CCF3EA-4E5C-45EF-A2AD-3716C6A3B9D7}.Release|x64.Build.0 = Release|x64
 		{D8CCF3EA-4E5C-45EF-A2AD-3716C6A3B9D7}.Release|x86.ActiveCfg = Release|Win32
 		{D8CCF3EA-4E5C-45EF-A2AD-3716C6A3B9D7}.Release|x86.Build.0 = Release|Win32
+		{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}.Debug|x64.ActiveCfg = Debug|x64
+		{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}.Debug|x64.Build.0 = Debug|x64
+		{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}.Debug|x86.ActiveCfg = Debug|Win32
+		{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}.Debug|x86.Build.0 = Debug|Win32
+		{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}.Release|x64.ActiveCfg = Release|x64
+		{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}.Release|x64.Build.0 = Release|x64
+		{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}.Release|x86.ActiveCfg = Release|Win32
+		{691CBD49-3376-4BEF-B2F3-15CA6E6D35AA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF69D451-CE95-425D-9D7E-3D6C25D4B045}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		doonaEngine_SOURCE\doonaEngine_SOURCE.vcxitems*{691cbd49-3376-4bef-b2f3-15ca6e6d35aa}*SharedItemsImports = 4
+		doonaEngine_SOURCE\doonaEngine_SOURCE.vcxitems*{fbcdf916-3130-4843-a69f-3fdda68b9b91}*SharedItemsImports = 9
 	EndGlobalSection
 EndGlobal

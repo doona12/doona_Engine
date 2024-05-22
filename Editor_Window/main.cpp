@@ -3,8 +3,11 @@
 
 #include "framework.h"
 #include "Editor_Window.h"
-#include "CommonInclude.h"
 
+#include "..\\doonaEngine_SOURCE\\dnApplication.h"
+
+//#pragma comment (lib,"..\\x64\\Debug\\doonaEngine_Window.lib")
+Application app;
 
 #define MAX_LOADSTRING 100
 
@@ -21,7 +24,7 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 핸들
                      _In_opt_ HINSTANCE hPrevInstance,//바로앞에 실행된 현재 프로그램의 인스턴스핸들,없을경우 NULL
-                                                      //지금은 신경쓰지 않아도 되는값.
+                                                      //지금은 신경쓰지 않아도 되는값!
                      _In_ LPWSTR    lpCmdLine,//명령행으로 입력된 프로그램 인수
                      _In_ int       nCmdShow)//프로그램이 실행될 형태,보통은 모양정보 등이 전달
 {
@@ -29,6 +32,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 �
     UNREFERENCED_PARAMETER(lpCmdLine);
 
 
+    app.test();
     // TODO: 여기에 코드를 입력합니다.
 
 
@@ -47,13 +51,30 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 �
 
     MSG msg;
 
-    // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+   //GetMessage(&msg, nullptr, 0, 0)
+   //프로세스에서 발생한 메세지를 메세지 큐에서 가져오는 함수
+   //메세지큐에 아무것도 없다면?? 아무 메세지도 가져오지 않게된다.
+
+    //PeekMessage : 메세지큐에 메세지 유무에 상관없이 함수가 리턴된다.
+    //              리턴값이 true인 경우 메세지가 있고 false인 경우는 메세지가 없다라고 가르켜준다.
+
+
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg,nullptr,0,0,PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if (msg.message == WM_QUIT)
+                break;
+            if (!TranslateAccelerator(msg.hwnd,hAccelTable,&msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else
+        {
+            // 메세지가 없을 경우 여기서 처리
+            //게임 로직이 들어가면 된다.
         }
     }
 
@@ -147,12 +168,59 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+
+    /*case WM_KEYDOWN:
+    {
+
+    }
+    break;*/
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+
+            //핸들 -> 메뉴,크기변경,,등등
+            //DC -> 글자,그림 등 그리는작업
+            //화면 출력에 필요한 모든 정보를 가지는 데이터 구조체
+            //GDI 모듈에 의해서 관리된다.
+            //어떤 폰트를 사용할지,선 굵기,색상
+
+            //파란 브러쉬 생성
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 255));
+            //파란브러쉬 DC에 선택,흰색 브러쉬 반환
+            HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
+            
+
+            Rectangle(hdc, 100, 100, 200, 200);
+            //다시 흰색 브러쉬 선택
+            (HBRUSH)SelectObject(hdc, oldBrush);
+            //파란 브러쉬 삭제
+            DeleteObject(brush);
+
+
+            HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
+            HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
+
+            Ellipse(hdc, 200, 200, 300, 300);
+
+            SelectObject(hdc, oldPen);
+            DeleteObject(redPen);
+
+            
+
+            
+            // 기본으로 자주 사용되는 GDI오브제그를 미리 DC안에 만들어 두었는데
+            // 그 오브젝트들을 스톡 오브젝트라고 한다.
+
+            HBRUSH grayBrush = (HBRUSH)GetStockObject(GRAY_BRUSH);
+            oldBrush = (HBRUSH)SelectObject(hdc, grayBrush);
+            Rectangle(hdc, 400, 400, 500, 500);
+            (HBRUSH)SelectObject(hdc, oldBrush);
+
+
+
             EndPaint(hWnd, &ps);
+
         }
         break;
     case WM_DESTROY:
