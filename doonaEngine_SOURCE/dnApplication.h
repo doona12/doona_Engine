@@ -1,6 +1,7 @@
 #pragma once
 #include "CommonInclude.h"
 #include "GameObject.h"
+#include "RedObject.h"
 
 
 namespace dn
@@ -23,5 +24,6 @@ namespace dn
 		HDC mHdc;
 
 		GameObject mPlayer;
+		RedObject mRedPlayer;
 	};
 }

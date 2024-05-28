@@ -1,5 +1,6 @@
 #include "GameObject.h"
-
+#include "Input.h"
+#include "Time.h"
 
 namespace dn
 {
@@ -12,21 +13,23 @@ namespace dn
 
 	void GameObject::Update()
 	{
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		const int speed = 100.0f;
+
+		if (Input::GetKey(eKeyCode::Left))
 		{
-			mx -= 0.01f;
+			mx -= speed * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		if (Input::GetKey(eKeyCode::Right))
 		{
-			mx += 0.01f;
+			mx += speed * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		if (Input::GetKey(eKeyCode::Up))
 		{
-			my -= 0.01f;
+			my -= speed * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		if (Input::GetKey(eKeyCode::Down))
 		{
-			my += 0.01f;
+			my += speed * Time::DeltaTime();
 		}
 	}
 

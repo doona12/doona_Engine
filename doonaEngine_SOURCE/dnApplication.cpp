@@ -1,5 +1,6 @@
 #include "dnApplication.h"
-
+#include "Input.h"
+#include "Time.h"
 
 namespace dn
 {
@@ -15,6 +16,9 @@ namespace dn
 		mHdc = GetDC(hwnd);
 
 		mPlayer.SetPosition(0, 0);
+
+		Input::Initailize();
+		Time::Initailize();
 	}
 
 	void Application::Run()
@@ -26,6 +30,9 @@ namespace dn
 
 	void Application::Update()
 	{
+		Input::Update();
+		Time::Update();
+
 		mPlayer.Update();
 		
 	}
@@ -36,5 +43,7 @@ namespace dn
 	void Application::Render()
 	{
 		mPlayer.Render(mHdc);
+		Time::Render(mHdc);
+		//mRedPlayer.Render(mHdc);
 	}
 }
